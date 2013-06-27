@@ -1,0 +1,12 @@
+# Target
+Target		= protogen
+
+# Sources
+Modules[] =
+	Protogen
+
+# Library dependencies
+Requires[] =
+	springlobby
+
+ocaml-program ()

@@ -1,0 +1,186 @@
+#!/usr/bin/env perl
+
+use common::sense;
+use warnings FATAL => 'all';
+
+my @lines = `gcc -w -E -P -DPLAIN_API_STRUCTURE unitsync_api.h`;
+chomp for @lines;
+
+my @names = @lines;
+($_) = /(\w+)\(/ for @names;
+
+my @fptrs = @lines;
+s/(\w+)\(/(*$1)(/ for @fptrs;
+
+print <<EOF;
+#include <stdbool.h>
+
+struct unitsync {
+  void *lib;
+EOF
+say "  $_" for @fptrs;
+print <<EOF;
+};
+
+char const *load_unitsync (char const *dll, struct unitsync *api);
+void unload_unitsync (struct unitsync *api);
+
+#if !CLIENT
+#include <dlfcn.h>
+
+char const *
+load_unitsync (char const *dll, struct unitsync *api)
+{
+  api->lib = dlopen (dll, RTLD_NOW);
+  if (!api->lib)
+    return dlerror ();
+
+#define RESOLVE(api, func)             \\
+  api->func = dlsym (api->lib, #func); \\
+  if (!api->func)                      \\
+    return dlerror ()
+
+EOF
+print <<EOF
+  RESOLVE (api, $_);
+EOF
+     for @names;
+print <<EOF;
+
+  return 0;
+}
+
+void
+unload_unitsync (struct unitsync *api)
+{
+  dlclose (api->lib);
+
+  api->lib = 0;
+
+EOF
+say "  api->$_ = 0;" for @names;
+print <<EOF;
+}
+EOF
+
+
+my %conv_in = (
+   "const char*" => "String_val",
+   "int" => "Int_val",
+   "const int" => "Int_val",
+   "bool" => "Bool_val",
+   "float" => "Double_val",
+   "const float" => "Double_val",
+);
+
+my %conv_out = (
+   "const char*" => "caml_copy_string",
+   "int" => "Val_int",
+   "unsigned int" => "Val_int",
+   "bool" => "Val_bool",
+   "float" => "make_double_val",
+   "void" => "Val_unit",
+);
+
+my %ignore = (
+   GetInfoMap => 1,
+   GetInfoMapSize => 1,
+   ReadFileVFS => 1,
+   FindFilesVFS => 1,
+   FindFilesArchive => 1,
+   ReadArchiveFile => 1,
+);
+
+print <<EOF;
+#else
+#include <caml/alloc.h>
+#include <caml/mlvalues.h>
+
+static void preconditions (struct unitsync *api);
+static void postconditions (struct unitsync *api);
+
+EOF
+
+my @funcs;
+for (@lines) {
+   my ($ty, $name, $args) = /(.+) (\w+)\((.*)\);/;
+   next if $ignore{$name};
+
+   my $conv = $conv_out{$ty};
+   (die $name and next) unless $conv;
+
+   my @args =
+      map {
+         my ($aty, $aname) = /(.+) (\w+)/;
+         my $aconv = $conv_in{$aty};
+         (die "$name : $aname" and next) unless $aconv;
+         { name => $aname, ty => $aty, conv => $aconv }
+      }
+      split /,\s*/, $args;
+
+   push @funcs, {
+      ty => $ty,
+      name => $name,
+      args => \@args,
+   };
+
+   my $lcname = lcfirst $name;
+   print "\nCAMLprim value\n";
+   print "ml_UnitSync_$lcname (value api_val";
+   print ", value $_->{name}_val"
+      for @args;
+   print <<EOF;
+)
+{
+  struct unitsync *api = UnitSync_val (api_val);
+  preconditions (api);
+EOF
+   for (@args) {
+      print "  $_->{ty} $_->{name} = $_->{conv} ($_->{name}_val);\n";
+   }
+   print "  ";
+   if ($ty ne "void") {
+      print "$ty retval = ";
+   }
+   print "api->$name (";
+   print join ", ", map { $_->{name} } @args;
+   print <<EOF;
+);
+  postconditions (api);
+EOF
+   if ($ty ne "void") {
+      print "  return $conv (retval);\n";
+   } else {
+      print "  return Val_unit;\n";
+   }
+   print "}\n";
+}
+
+print "#endif\n";
+
+
+my %ml_type = (
+   "void" => "unit",
+   "unsigned int" => "int",
+   "int" => "int",
+   "const int" => "int",
+   "float" => "float",
+   "const float" => "float",
+   "bool" => "bool",
+   "const char*" => "string",
+);
+
+print "\n#if 0 // ocaml code\n";
+for (@funcs) {
+   $_->{name} = lcfirst $_->{name};
+   print "external $_->{name} : t";
+   for (@{ $_->{args} }) {
+      my $ty = $ml_type{$_->{ty}};
+      (die $_->{ty} and next) unless $ty;
+      print " -> $ty";
+   }
+   my $ty = $ml_type{$_->{ty}};
+   (die $_->{ty} and next) unless $ty;
+   print " -> $ty = \"ml_UnitSync_$_->{name}\"\n";
+}
+print "#endif\n";
