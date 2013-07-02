@@ -1,5 +1,5 @@
 # Target
-Target		= springlobby
+Name		= springlobby
 Description	= Spring lobby protocol implementation
 Version		= 0.1
 

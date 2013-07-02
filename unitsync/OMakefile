@@ -1,5 +1,5 @@
 # Target
-Target		= unitsync
+Name		= unitsync
 Description	= OCaml interface to Spring unitsync
 Version		= 0.1
 
