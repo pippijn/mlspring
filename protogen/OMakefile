@@ -3,10 +3,10 @@ Target		= protogen
 
 # Sources
 Modules[] =
-	Protogen
+  Protogen
 
 # Library dependencies
-Requires[] =
-	springlobby
+OCaml-Requires[] =
+  springlobby
 
-ocaml-program ()
+program (.DEFAULT)

@@ -5,21 +5,21 @@ Version		= 0.1
 
 # Sources
 Modules[] =
-	ExtInt
-	ExtMap
-	ExtPervasives
-	ExtSet
-	ExtString
-	IntMap
-	IntSet
-	StringMap
-	StringSet
+  ExtInt
+  ExtMap
+  ExtPervasives
+  ExtSet
+  ExtString
+  IntMap
+  IntSet
+  StringMap
+  StringSet
 
 # Library dependencies
-Requires[] =
-	batteries
-	deriving-ocsigen
-	deriving-ocsigen.syntax
+OCaml-Requires[] =
+  batteries
+  deriving-ocsigen
+  deriving-ocsigen.syntax
 
 # Camlp4
 Flags. +=
@@ -28,4 +28,4 @@ Flags. +=
   $|extSet.ml|		= -syntax camlp4o
   $|extString.ml|	= -syntax camlp4o
 
-ocaml-library ()
+library (.DEFAULT)

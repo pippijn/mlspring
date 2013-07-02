@@ -3,23 +3,23 @@ Target		= mllobby
 
 # Sources
 Modules[] =
-	ConsoleHandler
-	Env
-	EnvTypes
-#	Gui
-	Lobby
-	Main
-	Network
-	NetworkHandler
-	Settings
+  ConsoleHandler
+  Env
+  EnvTypes
+#  Gui
+  Lobby
+  Main
+  Network
+  NetworkHandler
+  Settings
 
 # Library dependencies
-Requires[] =
-	unitsync
-	springlobby
-	lwt.text
-	lwt.syntax
-	deriving-ocsigen.syntax
+OCaml-Requires[] =
+  unitsync
+  springlobby
+  lwt.text
+  lwt.syntax
+  deriving-ocsigen.syntax
 
 # Camlp4
 Flags. +=
@@ -31,4 +31,4 @@ Flags. +=
   $|env.ml|		= -syntax camlp4o
   $|consoleHandler.ml|	= -syntax camlp4o
 
-ocaml-program ()
+program (.DEFAULT)
