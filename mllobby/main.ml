@@ -1,6 +1,10 @@
 open Lwt
 
 
+(* XXX: 2.3 doesn't have this *)
+let async = ignore
+
+
 let loop io =
   let unitsync = UnitSync.create "/home/pippijn/.spring" in
 

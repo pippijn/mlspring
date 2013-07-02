@@ -3,6 +3,10 @@ open ExtPervasives
 open Lwt
 
 
+(* XXX: 2.3 doesn't have this *)
+let async = ignore
+
+
 let is_springie userName =
   BatString.starts_with userName "Springiee"
 
