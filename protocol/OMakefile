@@ -23,4 +23,4 @@ Flags. +=
   $|protoType.ml|	= -syntax camlp4o
   $|serverProto.ml|	= -syntax camlp4o
 
-library (.DEFAULT)
+library-install (.DEFAULT)

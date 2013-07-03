@@ -22,4 +22,4 @@ OCaml-Requires[] =
 Flags. +=
   $|unitSync.ml|	= -syntax camlp4o
 
-library (.DEFAULT)
+library-install (.DEFAULT)

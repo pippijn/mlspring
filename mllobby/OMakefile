@@ -31,4 +31,4 @@ Flags. +=
   $|env.ml|		= -syntax camlp4o
   $|consoleHandler.ml|	= -syntax camlp4o
 
-program (.DEFAULT)
+program-install (.DEFAULT)

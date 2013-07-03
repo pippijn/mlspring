@@ -9,4 +9,4 @@ Modules[] =
 OCaml-Requires[] =
   springlobby
 
-program (.DEFAULT)
+program-install (.DEFAULT)

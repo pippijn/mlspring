@@ -28,4 +28,4 @@ Flags. +=
   $|extSet.ml|		= -syntax camlp4o
   $|extString.ml|	= -syntax camlp4o
 
-library (.DEFAULT)
+library-install (.DEFAULT)
