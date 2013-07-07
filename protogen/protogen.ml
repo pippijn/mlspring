@@ -1,8 +1,7 @@
 (* Generate OCaml sources for client and server protocol messages *)
 open ProtoType
 
-
-let (|>) = BatPervasives.(|>)
+let (|>) x f = f x
 
 
 (********************************************)

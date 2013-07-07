@@ -1,5 +1,5 @@
+let (|>) x f = f x
 let (--) = BatPervasives.(--)
-let (|>) = BatPervasives.(|>)
 
 
 module Show_lazy_t(S : Deriving_Show.Show) = struct

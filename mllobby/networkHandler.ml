@@ -1,5 +1,4 @@
 open Env
-open ExtPervasives
 open Lwt
 
 
@@ -326,7 +325,7 @@ let handle io env = let open ServerProto in function
   | CLIENTS (chanName, clients) ->
       let ch_clients =
         List.fold_left
-          (flip StringSet.add)
+          (BatPervasives.flip StringSet.add)
           Env.empty_channel.ch_clients
           (BatString.nsplit clients " ")
       in
