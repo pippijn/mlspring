@@ -2235,7 +2235,7 @@ ml_UnitSync_lpGetStrKeyStrVal (value api_val, value key_val, value defValue_val)
 }
 #endif
 
-#if 0 // ocaml code
+#if 0 /* ocaml code */
 external getNextError : t -> string = "ml_UnitSync_getNextError"
 external getSpringVersion : t -> string = "ml_UnitSync_getSpringVersion"
 external getSpringVersionPatchset : t -> string = "ml_UnitSync_getSpringVersionPatchset"
