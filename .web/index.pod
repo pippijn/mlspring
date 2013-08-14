@@ -1,0 +1,8 @@
+=head1 Spring lobby client
+
+Spring RTS is a real time strategy engine. This project is a Spring Lobby client
+written in OCaml with Lwt. It features a simple console client based on
+C<readline>, as well as a lobby command parser automatically generated from the
+protocol specification.
+
+L<Git repository|https://github.com/pippijn/mlspring>
