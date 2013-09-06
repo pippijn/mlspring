@@ -1,4 +1,4 @@
-install Program ".DEFAULT" [
+build Program ".DEFAULT" [
   (* Target *)
   Name		"protogen";
 

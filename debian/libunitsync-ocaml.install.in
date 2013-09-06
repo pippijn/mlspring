@@ -1,0 +1,6 @@
+@OCamlStdlibDir@/unitsync/META
+@OCamlStdlibDir@/unitsync/*.cma
+@OCamlStdlibDir@/unitsync/*.cmxs
+
+OPT: @OCamlStdlibDir@/stublibs/*.so
+OPT: @OCamlStdlibDir@/stublibs/*.so.owner

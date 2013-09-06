@@ -1,0 +1,3 @@
+@OCamlStdlibDir@/springlobby/*.a
+@OCamlStdlibDir@/springlobby/*.cm[ix]
+@OCamlStdlibDir@/springlobby/*.cmxa

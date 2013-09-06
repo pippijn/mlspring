@@ -1,0 +1,3 @@
+@OCamlStdlibDir@/common/META
+@OCamlStdlibDir@/common/*.cma
+@OCamlStdlibDir@/common/*.cmxs

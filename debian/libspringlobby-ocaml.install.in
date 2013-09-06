@@ -1,0 +1,3 @@
+@OCamlStdlibDir@/springlobby/META
+@OCamlStdlibDir@/springlobby/*.cma
+@OCamlStdlibDir@/springlobby/*.cmxs
