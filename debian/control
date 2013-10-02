@@ -2,18 +2,16 @@ Source: ocaml-spring
 Section: ocaml
 Priority: optional
 Maintainer: Pippijn van Steenhoven <pip88nl@gmail.com>
-Uploaders: 
-  Pippijn van Steenhoven <pip88nl@gmail.com>
 Build-Depends:
-  obuild,
-  ocaml-nox (>= 3.12),
-  ocaml-findlib,
-  libbatteries-ocaml-dev,
-  libderiving-ocsigen-ocaml-dev,
-  libsexplib-camlp4-dev,
-  liblwt-ocaml-dev,
-  dh-ocaml,
-  debhelper (>= 8.0.0)
+ debhelper (>= 8.0.0),
+ obuild,
+ dh-ocaml,
+ ocaml-nox (>= 3.12),
+ ocaml-findlib,
+ libbatteries-ocaml-dev,
+ libderiving-ocsigen-ocaml-dev,
+ liblwt-ocaml-dev,
+ libsexplib-camlp4-dev
 Standards-Version: 3.9.2
 Homepage: https://github.com/pippijn/spring
 Vcs-Git: git://github.com/pippijn/spring
