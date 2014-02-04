@@ -1,0 +1,31 @@
+Name		= mllobby
+
+OCaml-Sources[] =
+  ConsoleHandler
+  Env
+  EnvTypes
+  #Gui
+  Lobby
+  Main
+  Network
+  NetworkHandler
+  Settings
+
+OCaml-Requires[] =
+  unitsync
+  springlobby
+  lwt.text
+  lwt.syntax
+  deriving-ocsigen.syntax
+
+Flags. +=
+  $|envTypes.ml|	= -syntax camlp4o
+  $|networkHandler.ml|	= -syntax camlp4o
+  $|network.ml|		= -syntax camlp4o
+  $|lobby.ml|		= -syntax camlp4o
+  $|main.ml|		= -syntax camlp4o
+  $|env.ml|		= -syntax camlp4o
+  $|consoleHandler.ml|	= -syntax camlp4o
+
+TARGET = $(program-install)
+#.DEFAULT: $(TARGET)

@@ -1,0 +1,10 @@
+Name		= protogen
+
+OCaml-Sources[] =
+  Protogen
+
+OCaml-Requires[] =
+  springlobby
+
+TARGET = $(program-install)
+.DEFAULT: $(TARGET)

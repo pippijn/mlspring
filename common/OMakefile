@@ -1,0 +1,28 @@
+Name		= common
+Description	= Common library for mlspring
+Version		= 0.1
+
+OCaml-Sources[] =
+  ExtInt
+  ExtMap
+  ExtPervasives
+  ExtSet
+  ExtString
+  IntMap
+  IntSet
+  StringMap
+  StringSet
+
+OCaml-Requires[] =
+  batteries
+  deriving-ocsigen
+  deriving-ocsigen.syntax
+
+Flags. +=
+  $|extInt.ml|		= -syntax camlp4o
+  $|extMap.ml|		= -syntax camlp4o
+  $|extSet.ml|		= -syntax camlp4o
+  $|extString.ml|	= -syntax camlp4o
+
+TARGET = $(library-install)
+.DEFAULT: $(TARGET)

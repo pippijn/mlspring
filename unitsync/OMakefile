@@ -1,0 +1,22 @@
+Name		= unitsync
+Description	= OCaml interface to Spring unitsync
+Version		= 0.1
+
+OCaml-Sources[] =
+  API
+  UnitSync
+
+C-Sources[] =
+  unitsync.c
+  unitsync_api.c
+
+OCaml-Requires[] =
+  batteries
+  common
+  deriving-ocsigen.syntax
+
+Flags. +=
+  $|unitSync.ml|	= -syntax camlp4o
+
+TARGET = $(library-install)
+.DEFAULT: $(TARGET)

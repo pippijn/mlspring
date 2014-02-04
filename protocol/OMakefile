@@ -1,0 +1,23 @@
+Name		= springlobby
+Description	= Spring lobby protocol implementation
+Version		= 0.1
+
+OCaml-Sources[] =
+  ClientProto
+  Proto
+  ProtoType
+  Protocol
+  ServerProto
+
+OCaml-Requires[] =
+  batteries
+  common
+  deriving-ocsigen.syntax
+
+Flags. +=
+  $|clientProto.ml|	= -syntax camlp4o
+  $|protoType.ml|	= -syntax camlp4o
+  $|serverProto.ml|	= -syntax camlp4o
+
+TARGET = $(library-install)
+.DEFAULT: $(TARGET)
